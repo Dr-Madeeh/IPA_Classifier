@@ -1,4 +1,3 @@
-pickle
 sklearn.naive_bayes
 sklearn.feature_extraction.text
 streamlit

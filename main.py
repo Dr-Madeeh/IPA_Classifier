@@ -109,7 +109,7 @@ if submit_message:
 
     result = pd.DataFrame(columns=['predicted_class','predicted_prob'])
 
-    st.markdown("<h4 style='text-align: center; color: orange;'>احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: black;'>احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية</h4>", unsafe_allow_html=True)
 
     ys=[]
     for i in range(nums):
@@ -168,7 +168,7 @@ if submit_message:
 
     #st.markdown("<h4 style='text-align: center; color: orange;'>---------------------------------------</h4>", unsafe_allow_html=True)
 
-    st.markdown("<h4 style='text-align: center; color: orange;'>احتمالات التصنيف طبقا للمجالات المعرفية الفرعية</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: black;'>احتمالات التصنيف طبقا للمجالات المعرفية الفرعية</h4>", unsafe_allow_html=True)
 
     ys = []
     for i in range(nums):
@@ -189,11 +189,11 @@ if submit_message:
                    "predicted_class": "المجالات المعرفية الفرعية المحتملة"
                })
 
-   for i in range(nums):
-    fig.data[i].text = ys[i]
+    for i in range(nums):
+     fig.data[i].text = ys[i]
 
 
-   fig.update_traces(textposition='inside')
+    fig.update_traces(textposition='inside')
 
     st.plotly_chart(fig)
     

@@ -166,19 +166,38 @@ if submit_message:
 
     result = pd.DataFrame(columns=['predicted_class','predicted_prob'])
 
-    st.markdown("<h4 style='text-align: center; color: orange;'>---------------------------------------</h4>", unsafe_allow_html=True)
+    #st.markdown("<h4 style='text-align: center; color: orange;'>---------------------------------------</h4>", unsafe_allow_html=True)
 
     st.markdown("<h4 style='text-align: center; color: orange;'>احتمالات التصنيف طبقا للمجالات المعرفية الفرعية</h4>", unsafe_allow_html=True)
 
-     
+    ys = []
     for i in range(nums):
       #print(classes.iloc[preds_idx[0][i]])
       #print((predictions[0][preds_idx[0][i]]/sum)*100)
       s = getsubstr(str(classes.iloc[preds_idx[0][i]]),'class_name ','\n')
+      ys.append(round((predictions[0][preds_idx[0][i]]/sum)*100,2))
       dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
       result = result.append(dict, ignore_index = True)
 
-      st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
+    fig = px.bar(result,
+              x='predicted_class',
+              y='predicted_prob',
+              hover_name='predicted_class', color='predicted_class',
+               labels={
+                   "predicted_class": "المجال المعرفي الفرعي المحتمل",
+                   "predicted_prob": "الاحتمالية",
+                   "predicted_class": "المجالات المعرفية الفرعية المحتملة"
+               })
+
+   for i in range(nums):
+    fig.data[i].text = ys[i]
+
+
+   fig.update_traces(textposition='inside')
+
+    st.plotly_chart(fig)
+    
+      #st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
       
         #pred = clf.predict(vectorizer.transform([message]))[0]
         #dd = df.loc[df['labelSecondary'] == pred]

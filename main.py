@@ -6,16 +6,39 @@ Created on Mon Oct 11 22:40:01 2021
 """
 
 import pickle
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st 
 import pandas as pd
+from nltk import word_tokenize
+from nltk.stem.isri import ISRIStemmer
+import re
+import nltk
+
+#!pip install stop_words
+nltk.download('punkt')
+
+def getsubstr(s,start,end): 
+  return s[s.find(start)+len(start):s.rfind(end)]
+
+
+sts = ISRIStemmer()
+word_list = "عرض يستخدم الى التفاعل مع المستخدمين في هاذا المجال !وعلمآ تكون الخدمه للستطلاع على الخدمات والعروض المقدمة"
+
+# Define a function
+def filter(word_list):
+    wordsfilter=[]
+    for a in word_tokenize(word_list):
+        stem = sts.stem(a)
+        wordsfilter.append(stem)
+    #print(wordsfilter)
+    return ' '.join(wordsfilter)
 
 
 df = pd.read_table(r'./123.txt')
 
-modelname = 'model.pickle'
-vectorizername = 'vec.pickle'
+modelname = 'modelPrimary.pickle'
+vectorizername = 'vecPrimary.pickle'
 clf = pickle.load(open(modelname, 'rb'))
 vectorizer = pickle.load(open(vectorizername, 'rb'))
 
@@ -35,12 +58,43 @@ with st.form(key='mlform'):
     submit_message = st.form_submit_button(label='صنف')
     
 if submit_message:
-    pred = clf.predict(vectorizer.transform([message]))[0]
-    dd = df.loc[df['labelSecondary'] == pred]
-    dd = dd.iloc[[0]]
-    #print(dd['label'])
-    #st.title(pred)
+    query = " ".join(re.findall('[\w]+',message))
+    query = remove_stopWords(query)
+    query = filter(query)
+    
+    predictions =clf.predict_proba(count_vect.transform([query]))
+    preds_idx = np.argsort(-predictions) 
 
-    st.markdown("<h3 style='text-align: center;color:red'>"+  pred +"</h3>", unsafe_allow_html=True)
+    classes = pd.DataFrame(clf.classes_, columns=['class_name'])
+
+    sum = 0
+    nums = 0
+    for i in range(10):
+      if predictions[0][preds_idx[0][i]] < 0.1:
+        break;
+      else:
+        nums = nums +1
+        sum = sum + predictions[0][preds_idx[0][i]]
+        #print(classes.iloc[preds_idx[0][i]])
+        #print(predictions[0][preds_idx[0][i]])
+
+    result = pd.DataFrame(columns=['predicted_class','predicted_prob'])
+
+    for i in range(nums):
+      #print(classes.iloc[preds_idx[0][i]])
+      #print((predictions[0][preds_idx[0][i]]/sum)*100)
+      s = getsubstr(str(classes.iloc[preds_idx[0][i]]),'class_name ','\n')
+      dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
+      result = result.append(dict, ignore_index = True)
+
+      st.markdown("<h3 style='text-align: center;color:red'>"+  s + " ("+ (predictions[0][preds_idx[0][i]]/sum)*100 +")" +"</h3>", unsafe_allow_html=True)
+      
+        #pred = clf.predict(vectorizer.transform([message]))[0]
+        #dd = df.loc[df['labelSecondary'] == pred]
+        #dd = dd.iloc[[0]]
+        #print(dd['label'])
+        #st.title(pred)
+
+        #st.markdown("<h3 style='text-align: center;color:red'>"+  pred +"</h3>", unsafe_allow_html=True)
 
     

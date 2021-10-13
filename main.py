@@ -114,7 +114,7 @@ if submit_message:
       dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
       result = result.append(dict, ignore_index = True)
 
-      st.markdown("<h4 style='text-align: center;color:blue'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
+      st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
       
         #pred = clf.predict(vectorizer.transform([message]))[0]
         #dd = df.loc[df['labelSecondary'] == pred]
@@ -154,7 +154,7 @@ if submit_message:
       dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
       result = result.append(dict, ignore_index = True)
 
-      st.markdown("<h4 style='text-align: center;color:blue'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
+      st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
       
         #pred = clf.predict(vectorizer.transform([message]))[0]
         #dd = df.loc[df['labelSecondary'] == pred]

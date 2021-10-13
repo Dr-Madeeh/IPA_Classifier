@@ -18,6 +18,10 @@ import re
 import nltk
 from stop_words import get_stop_words
 import numpy as np
+import plotly.express as px
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 
 #!pip install stop_words
 nltk.download('punkt')

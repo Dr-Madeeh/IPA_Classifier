@@ -140,7 +140,10 @@ if submit_message:
                      "predicted_class": "المجالات المعرفية الرئيسية المحتملة"
                  })
 
-    fig.data.text = ys
+    for i in range(nums):
+     fig.data[i].text = ys[i]
+    
+    
     fig.update_traces(textposition='inside')
 
     st.plotly_chart(fig)

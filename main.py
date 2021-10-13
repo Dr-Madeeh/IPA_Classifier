@@ -14,6 +14,7 @@ from nltk import word_tokenize
 from nltk.stem.isri import ISRIStemmer
 import re
 import nltk
+from stop_words import get_stop_words
 
 #!pip install stop_words
 nltk.download('punkt')
@@ -21,6 +22,11 @@ nltk.download('punkt')
 def getsubstr(s,start,end): 
   return s[s.find(start)+len(start):s.rfind(end)]
 
+def remove_stopWords(s):
+    '''For removing stop words
+    '''
+    s = ' '.join(word for word in s.split() if word not in stop_words)
+    return s
 
 sts = ISRIStemmer()
 word_list = "عرض يستخدم الى التفاعل مع المستخدمين في هاذا المجال !وعلمآ تكون الخدمه للستطلاع على الخدمات والعروض المقدمة"

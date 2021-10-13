@@ -15,6 +15,7 @@ from nltk.stem.isri import ISRIStemmer
 import re
 import nltk
 from stop_words import get_stop_words
+import numpy as np
 
 #!pip install stop_words
 nltk.download('punkt')

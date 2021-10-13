@@ -127,6 +127,14 @@ if submit_message:
         #st.title(pred)
 
         #st.markdown("<h3 style='text-align: center;color:red'>"+  pred +"</h3>", unsafe_allow_html=True)
+        
+    state_total_graph = px.bar(
+        result, 
+        x='predicted_class',
+        y='predicted_prob',
+        labels={'المجالات المعرفية':'الاحتمال' % (select)},
+        color='Status')
+    
     st.plotly_chart(result)
 ################################################
     predictions =clfSecondary.predict_proba(vectorizerSecondary .transform([query]))

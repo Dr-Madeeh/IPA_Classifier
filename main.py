@@ -22,6 +22,9 @@ nltk.download('punkt')
 def getsubstr(s,start,end): 
   return s[s.find(start)+len(start):s.rfind(end)]
 
+from stop_words import get_stop_words
+stop_words = get_stop_words('ar')
+
 def remove_stopWords(s):
     '''For removing stop words
     '''

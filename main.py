@@ -140,7 +140,7 @@ if submit_message:
                      "predicted_class": "المجالات المعرفية الرئيسية المحتملة"
                  })
 
-    fig.update_traces(text=ys, textposition='outside')
+    fig.update_traces(text=result.predicted_class, textposition='outside')
     fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     st.plotly_chart(fig)
 ################################################

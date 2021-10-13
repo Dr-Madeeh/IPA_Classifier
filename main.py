@@ -131,7 +131,7 @@ if submit_message:
     fig = px.bar(result,
                 x='predicted_class',
                 y='predicted_prob',
-                hover_name='predicted_class')
+                hover_name='predicted_class', color='predicted_class')
 
     st.plotly_chart(fig)
 ################################################

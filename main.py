@@ -111,10 +111,12 @@ if submit_message:
 
     st.markdown("<h4 style='text-align: center; color: orange;'>احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية</h4>", unsafe_allow_html=True)
 
+    ys=[]
     for i in range(nums):
       #print(classes.iloc[preds_idx[0][i]])
       #print((predictions[0][preds_idx[0][i]]/sum)*100)
       s = getsubstr(str(classes.iloc[preds_idx[0][i]]),'class_name ','\n')
+      ys.append(((predictions[0][preds_idx[0][i]]/sum)*100))
       dict = {'predicted_class': s, 'predicted_prob': ((predictions[0][preds_idx[0][i]]/sum)*100)}
       result = result.append(dict, ignore_index = True)
 
@@ -138,7 +140,7 @@ if submit_message:
                      "predicted_class": "المجالات المعرفية الرئيسية المحتملة"
                  })
 
-    fig.update_traces(text='predicted_prob', textposition='outside')
+    fig.update_traces(text=ys, textposition='outside')
     fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     st.plotly_chart(fig)
 ################################################

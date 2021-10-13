@@ -123,6 +123,7 @@ if submit_message:
         #st.title(pred)
 
         #st.markdown("<h3 style='text-align: center;color:red'>"+  pred +"</h3>", unsafe_allow_html=True)
+    st.bar_chart(result)
 ################################################
     predictions =clfSecondary.predict_proba(vectorizerSecondary .transform([query]))
     preds_idx = np.argsort(-predictions) 

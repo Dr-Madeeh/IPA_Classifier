@@ -2,3 +2,4 @@ streamlit
 sklearn
 pandas
 stop_words
+nltk

@@ -128,14 +128,13 @@ if submit_message:
 
         #st.markdown("<h3 style='text-align: center;color:red'>"+  pred +"</h3>", unsafe_allow_html=True)
         
-    state_total_graph = px.bar(
-        result, 
-        x='predicted_class',
-        y='predicted_prob',
-        labels={'المجالات المعرفية':'الاحتمال'},
-        color='predicted_class')
-    
-    st.plotly_chart(result)
+    fig = px.bar(result,
+                x='predicted_class',
+                y='predicted_prob',
+                hover_name='predicted_class',
+                title='المجالات المعرفية المحتملة')
+
+    st.plotly_chart(fig)
 ################################################
     predictions =clfSecondary.predict_proba(vectorizerSecondary .transform([query]))
     preds_idx = np.argsort(-predictions) 

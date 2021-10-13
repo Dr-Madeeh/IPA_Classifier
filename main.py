@@ -111,7 +111,7 @@ if submit_message:
       #print(classes.iloc[preds_idx[0][i]])
       #print((predictions[0][preds_idx[0][i]]/sum)*100)
       s = getsubstr(str(classes.iloc[preds_idx[0][i]]),'class_name ','\n')
-      dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
+      dict = {'predicted_class': s, 'predicted_prob': ((predictions[0][preds_idx[0][i]]/sum)*100).astype('object')}
       result = result.append(dict, ignore_index = True)
 
       st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)

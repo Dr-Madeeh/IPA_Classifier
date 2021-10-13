@@ -140,8 +140,9 @@ if submit_message:
                      "predicted_class": "المجالات المعرفية الرئيسية المحتملة"
                  })
 
-    fig.update_traces(text=result.predicted_class, textposition='outside')
-    fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+    fig.data[-1].text = ys
+    fig.update_traces(textposition='inside')
+
     st.plotly_chart(fig)
 ################################################
     predictions =clfSecondary.predict_proba(vectorizerSecondary .transform([query]))

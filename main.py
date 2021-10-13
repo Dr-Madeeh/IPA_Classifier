@@ -127,7 +127,7 @@ if submit_message:
     predictions =clfSecondary.predict_proba(vectorizerSecondary .transform([query]))
     preds_idx = np.argsort(-predictions) 
 
-    classes = pd.DataFrame(clf.classes_, columns=['class_name'])
+    classes = pd.DataFrame(clfSecondary.classes_, columns=['class_name'])
 
     sum = 0
     nums = 0

@@ -4,3 +4,4 @@ pandas
 stop_words
 nltk
 stop_words
+plotly

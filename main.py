@@ -71,7 +71,7 @@ if submit_message:
     query = remove_stopWords(query)
     query = filter(query)
     
-    predictions =clf.predict_proba(count_vect.transform([query]))
+    predictions =clf.predict_proba(vectorizer .transform([query]))
     preds_idx = np.argsort(-predictions) 
 
     classes = pd.DataFrame(clf.classes_, columns=['class_name'])

@@ -131,7 +131,12 @@ if submit_message:
     fig = px.bar(result,
                 x='predicted_class',
                 y='predicted_prob',
-                hover_name='predicted_class', color='predicted_class')
+                hover_name='predicted_class', color='predicted_class',
+                 labels={
+                     "predicted_class": "المجال المعرفي الرئيسي المحتمل",
+                     "predicted_prob": "الاحتمالية",
+                     "predicted_class": "المجالات المعرفية الرئيسية المحتملة"
+                 })
 
     st.plotly_chart(fig)
 ################################################

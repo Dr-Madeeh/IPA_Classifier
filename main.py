@@ -180,7 +180,7 @@ if submit_message:
       ys.append(round((predictions[0][preds_idx[0][i]]/sum)*100,2))
       dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
       result = result.append(dict, ignore_index = True)
-
+ 
     fig = px.bar(result,
               x='predicted_class',
               y='predicted_prob',

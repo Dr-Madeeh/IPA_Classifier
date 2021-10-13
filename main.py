@@ -90,6 +90,8 @@ if submit_message:
 
     result = pd.DataFrame(columns=['predicted_class','predicted_prob'])
 
+    st.markdown("<h4 style='text-align: center; color: orange;'>احتمالات التصنيف</h4>", unsafe_allow_html=True)
+
     for i in range(nums):
       #print(classes.iloc[preds_idx[0][i]])
       #print((predictions[0][preds_idx[0][i]]/sum)*100)

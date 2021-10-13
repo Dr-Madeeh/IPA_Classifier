@@ -132,7 +132,7 @@ if submit_message:
         result, 
         x='predicted_class',
         y='predicted_prob',
-        labels={'المجالات المعرفية':'الاحتمال' % (select)},
+        labels={'المجالات المعرفية':'الاحتمال'},
         color='Status')
     
     st.plotly_chart(result)

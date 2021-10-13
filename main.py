@@ -109,7 +109,7 @@ if submit_message:
 
     result = pd.DataFrame(columns=['predicted_class','predicted_prob'])
 
-    st.markdown("<h4 style='text-align: center; color: black;'>احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية</h4>", unsafe_allow_html=True)
+    #st.markdown("<h4 style='text-align: center; color: black;'>احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية</h4>", unsafe_allow_html=True)
 
     ys=[]
     for i in range(nums):
@@ -133,6 +133,7 @@ if submit_message:
     fig = px.bar(result,
                 x='predicted_class',
                 y='predicted_prob',
+                title='احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية',
                 hover_name='predicted_class', color='predicted_class',
                  labels={
                      "predicted_class": "المجال المعرفي الرئيسي المحتمل",
@@ -168,7 +169,7 @@ if submit_message:
 
     #st.markdown("<h4 style='text-align: center; color: orange;'>---------------------------------------</h4>", unsafe_allow_html=True)
 
-    st.markdown("<h4 style='text-align: center; color: black;'>احتمالات التصنيف طبقا للمجالات المعرفية الفرعية</h4>", unsafe_allow_html=True)
+    #st.markdown("<h4 style='text-align: center; color: black;'>احتمالات التصنيف طبقا للمجالات المعرفية الفرعية</h4>", unsafe_allow_html=True)
 
     ys = []
     for i in range(nums):
@@ -182,6 +183,7 @@ if submit_message:
     fig = px.bar(result,
               x='predicted_class',
               y='predicted_prob',
+              title='احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية',
               hover_name='predicted_class', color='predicted_class',
                labels={
                    "predicted_class": "المجال المعرفي الفرعي المحتمل",

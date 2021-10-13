@@ -134,7 +134,6 @@ if submit_message:
                 x='predicted_class',
                 y='predicted_prob',
                 title='احتمالات التصنيف طبقا للمجالات المعرفية الرئيسية',
-                xanchor: 'center',
                 hover_name='predicted_class', color='predicted_class',
                  labels={
                      "predicted_class": "المجال المعرفي الرئيسي المحتمل",
@@ -147,6 +146,7 @@ if submit_message:
     
     
     fig.update_traces(textposition='inside')
+    fig.update_layout(title_x=0.5)
 
     st.plotly_chart(fig)
 ################################################

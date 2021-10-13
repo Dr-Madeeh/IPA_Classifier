@@ -5,7 +5,9 @@ Created on Mon Oct 11 22:40:01 2021
 @author: m_nay
 """
 
+import bz2
 import pickle
+import _pickle as cPickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st 
@@ -19,6 +21,17 @@ import numpy as np
 
 #!pip install stop_words
 nltk.download('punkt')
+
+# Pickle a file and then compress it into a file with extension 
+def compressed_pickle(title, data):
+ with bz2.BZ2File(title + '.pbz2', 'w') as f: 
+  cPickle.dump(data, f)
+
+# Load any compressed pickle file
+def decompress_pickle(file):
+ data = bz2.BZ2File(file, 'rb')
+ data = cPickle.load(data)
+ return data
 
 def getsubstr(s,start,end): 
   return s[s.find(start)+len(start):s.rfind(end)]
@@ -52,6 +65,8 @@ vectorizername = 'vecPrimary.pickle'
 clf = pickle.load(open(modelname, 'rb'))
 vectorizer = pickle.load(open(vectorizername, 'rb'))
 
+clfSecondary = decompress_pickle('modelSecondary.pbz2') 
+vectorizerSecondary = pickle.load(open('vecSecondary.pickle', 'rb'))
 
 
 st.markdown("<h2 style='text-align: center;'>مصنف مركز البحوث والدراسات الآلي</h2>", unsafe_allow_html=True)
@@ -108,5 +123,40 @@ if submit_message:
         #st.title(pred)
 
         #st.markdown("<h3 style='text-align: center;color:red'>"+  pred +"</h3>", unsafe_allow_html=True)
+################################################
+    predictions =clfSecondary.predict_proba(vectorizerSecondary .transform([query]))
+    preds_idx = np.argsort(-predictions) 
 
+    classes = pd.DataFrame(clf.classes_, columns=['class_name'])
+
+    sum = 0
+    nums = 0
+    for i in range(10):
+      if predictions[0][preds_idx[0][i]] < 0.1:
+        break;
+      else:
+        nums = nums +1
+        sum = sum + predictions[0][preds_idx[0][i]]
+        #print(classes.iloc[preds_idx[0][i]])
+        #print(predictions[0][preds_idx[0][i]])
+
+    result = pd.DataFrame(columns=['predicted_class','predicted_prob'])
+
+    st.markdown("<h4 style='text-align: center; color: orange;'>---------------------------------------</h4>", unsafe_allow_html=True)
+
+    for i in range(nums):
+      #print(classes.iloc[preds_idx[0][i]])
+      #print((predictions[0][preds_idx[0][i]]/sum)*100)
+      s = getsubstr(str(classes.iloc[preds_idx[0][i]]),'class_name ','\n')
+      dict = {'predicted_class': s, 'predicted_prob': (predictions[0][preds_idx[0][i]]/sum)*100}
+      result = result.append(dict, ignore_index = True)
+
+      st.markdown("<h4 style='text-align: center;color:blue'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
+      
+        #pred = clf.predict(vectorizer.transform([message]))[0]
+        #dd = df.loc[df['labelSecondary'] == pred]
+        #dd = dd.iloc[[0]]
+        #print(dd['label'])
+        #st.title(pred)
+        
     

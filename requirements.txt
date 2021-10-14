@@ -6,3 +6,4 @@ nltk
 stop_words
 plotly
 matplotlib
+spacy

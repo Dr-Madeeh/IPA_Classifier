@@ -26,6 +26,9 @@ import spacy
 from spacy import displacy
 import spacy_streamlit
 
+python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_md
+
 models = ["en_core_web_sm", "en_core_web_md"]
 
 

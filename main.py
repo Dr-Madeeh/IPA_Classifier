@@ -215,7 +215,8 @@ if submit_message:
     st.plotly_chart(fig)
     
     doc = nlp(message)
-    visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
+    #visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
+    spacy_streamlit.visualize(models, doc)
     
       #st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
       

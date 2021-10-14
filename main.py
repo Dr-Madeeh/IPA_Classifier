@@ -24,8 +24,11 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import spacy
 from spacy import displacy
+import en_core_web_sm
 
-nlp = spacy.load('en_core_web_sm')
+nlp = en_core_web_sm.load()
+
+#nlp = spacy.load('en_core_web_sm')
 
 #!pip install stop_words
 nltk.download('punkt')

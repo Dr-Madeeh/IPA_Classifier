@@ -26,7 +26,9 @@ import spacy
 from spacy import displacy
 import en_core_web_sm
 
-nlp = en_core_web_sm.load()
+nlp = spacy.load('/opt/anaconda3/envs/NLPENV/lib/python3.7/site-packages/en_core_web_sm/en_core_web_sm-2.3.1')
+
+#nlp = en_core_web_sm.load()
 
 #nlp = spacy.load('en_core_web_sm')
 

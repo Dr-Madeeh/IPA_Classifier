@@ -216,6 +216,7 @@ if submit_message:
     
     doc = nlp(message)
     #visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
+    models = ["en_core_web_sm"]
     spacy_streamlit.visualize(models, doc)
     
       #st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)

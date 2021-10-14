@@ -22,6 +22,10 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+import spacy
+from spacy import displacy
+
+nlp = spacy.load('en_core_web_sm')
 
 #!pip install stop_words
 nltk.download('punkt')
@@ -87,6 +91,12 @@ with st.form(key='mlform'):
     submit_message = st.form_submit_button(label='صنف')
     
 if submit_message:
+ 
+    doc = nlp(message)
+    html = displacy.render(doc, style='ent', jupyter=True, options={'distance': 80})
+    style = "<style>mark.entity { display: inline-block }</style>"
+    st.write(f"{style}{get_html(html)}", unsafe_allow_html=True)
+   
     query = " ".join(re.findall('[\w]+',message))
     query = remove_stopWords(query)
     query = filter(query)

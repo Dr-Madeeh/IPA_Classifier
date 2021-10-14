@@ -216,7 +216,7 @@ if submit_message:
     
     doc = nlp(message)
     visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
-    visualize_ent(doc, labels=nlp.get_pipe("ent").labels)
+    #visualize_ent(doc, labels=nlp.get_pipe("ent").labels)
     models = ["en_core_web_sm"]
     #spacy_streamlit.visualize(models, doc)
     

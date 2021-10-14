@@ -25,7 +25,8 @@ import matplotlib.pyplot as plt
 import spacy
 from spacy import displacy
 
-nlp = spacy.load('https://spacy.io/models/en#en_core_web_sm')
+nlp = spacy.load('en')
+#nlp = spacy.load('https://spacy.io/models/en#en_core_web_sm')
 
 #nlp = en_core_web_sm.load()
 

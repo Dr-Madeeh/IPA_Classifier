@@ -26,19 +26,12 @@ import spacy
 from spacy import displacy
 import spacy_streamlit
 
-python -m spacy download en_core_web_sm
-python -m spacy download en_core_web_md
+import spacy
+from spacy_streamlit import visualize_ner
 
-models = ["en_core_web_sm", "en_core_web_md"]
+nlp = spacy.load("en_core_web_sm")
 
 
-
-#nlp = spacy.load("en_core_web_sm")
-#nlp = spacy.load('https://spacy.io/models/en#en_core_web_sm')
-
-#nlp = en_core_web_sm.load()
-
-#nlp = spacy.load('en_core_web_sm')
 
 #!pip install stop_words
 nltk.download('punkt')
@@ -105,11 +98,8 @@ with st.form(key='mlform'):
     
 if submit_message:
  
-    #doc = nlp(message)
-    #html = displacy.render(doc, style='ent', jupyter=True, options={'distance': 80})
-    #style = "<style>mark.entity { display: inline-block }</style>"
-    #st.write(f"{style}{get_html(html)}", unsafe_allow_html=True)
-    spacy_streamlit.visualize(models, message)
+    doc = nlp(message)
+    visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
    
     query = " ".join(re.findall('[\w]+',message))
     query = remove_stopWords(query)

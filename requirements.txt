@@ -7,3 +7,4 @@ stop_words
 plotly
 matplotlib
 spacy
+spacy_streamlit

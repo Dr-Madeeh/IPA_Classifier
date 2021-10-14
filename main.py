@@ -98,8 +98,7 @@ with st.form(key='mlform'):
     
 if submit_message:
  
-    doc = nlp(message)
-    visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
+   
    
     query = " ".join(re.findall('[\w]+',message))
     query = remove_stopWords(query)
@@ -214,6 +213,9 @@ if submit_message:
     fig.update_layout(title_x=0.5)
 
     st.plotly_chart(fig)
+    
+    doc = nlp(message)
+    visualize_ner(doc, labels=nlp.get_pipe("ner").labels)
     
       #st.markdown("<h4 style='text-align: center;color:black'>"+  s + " ("+ str(round((predictions[0][preds_idx[0][i]]/sum)*100,2)) +"%)" +"</h4>", unsafe_allow_html=True)
       
